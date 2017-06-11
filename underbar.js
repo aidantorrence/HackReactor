@@ -46,14 +46,26 @@
   	}
   };
 
+
+
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   //
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+  	if (collection !== null && typeof collection === 'object') {
+      for (key in collection) {
+  		collection[key] = iterator(collection[key])
+  	  }
+    }
+    if (Array.isArray(collection) === true) {
+  	  for (var i = 0;i<collection.length;i++) {
+  		collection[i] = iterator(collection[i])
+  	  }
+    }
   };
-
+  
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
